@@ -74,7 +74,12 @@
     .primary-action { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 13px; padding: 0 24px; border: 1px solid var(--gold); border-radius: 999px; color: var(--charcoal); background: var(--gold); font-size: 11px; font-weight: 700; transition: background .2s,transform .2s; }
     .primary-action:hover { background: #e4c66d; transform: translateY(-2px); }
     .quiet-action { display: inline-flex; align-items: center; gap: 9px; color: #e4e6df; font-size: 11px; font-weight: 600; }
-    .quiet-action span { color: var(--gold); font-size: 17px; }
+    .quiet-action span { display: inline-flex; color: var(--gold); }
+    .nav-action span, .primary-action span, .quiet-action span, .service-arrow { display: inline-flex; align-items: center; }
+    .nav-action svg, .primary-action svg { width: 15px; height: 15px; }
+    .quiet-action svg { width: 18px; height: 18px; }
+    .service-arrow svg { width: 22px; height: 22px; }
+    .nav-action path, .primary-action path, .quiet-action path, .service-arrow path { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .hero-aside { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 14px; }
     .image-frame { position: relative; grid-column: 1 / -1; width: min(100%, 405px); justify-self: end; padding: 10px; border: 1px solid rgba(212,173,84,.38); background: #090a09; }
     .image-frame img { display: block; width: 100%; aspect-ratio: 1 / 1.04; object-fit: cover; }
@@ -289,7 +294,7 @@
         </div>
         <div class="nav-end">
           <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
-          <a class="nav-action" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+          <a class="nav-action" href="#contact">Get in touch <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
         </div>
       </div>
     </nav>
@@ -303,8 +308,8 @@
           <h1>Security for<br><span>what matters.</span></h1>
           <p class="hero-copy">The right protection begins with understanding your world. We bring calm, considered security to the people, places, and moments that matter most.</p>
           <div class="hero-actions">
-            <a class="primary-action" href="#contact">Start a conversation <span aria-hidden="true">↗</span></a>
-            <a class="quiet-action" href="#services">Explore our services <span aria-hidden="true">→</span></a>
+            <a class="primary-action" href="#contact">Start a conversation <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+            <a class="quiet-action" href="#services">Explore our services <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
           </div>
         </div>
         <div class="hero-aside">
@@ -330,9 +335,9 @@
           <p>From an individual engagement to a busy site, every assignment deserves a considered plan. Tell us what you’re looking to protect and we’ll discuss the right next step.</p>
         </div>
         <div class="service-list">
-          <a class="service-row" href="#contact"><span class="service-no">01</span><h3>Personal protection</h3><p>Discreet support shaped around your routine, environment, and preferences.</p><span class="service-arrow" aria-hidden="true">↗</span></a>
-          <a class="service-row" href="#contact"><span class="service-no">02</span><h3>Event &amp; site security</h3><p>A thoughtful security presence for gatherings, venues, and daily operations.</p><span class="service-arrow" aria-hidden="true">↗</span></a>
-          <a class="service-row" href="#contact"><span class="service-no">03</span><h3>Security planning</h3><p>Practical preparation to clarify concerns, priorities, and sensible next steps.</p><span class="service-arrow" aria-hidden="true">↗</span></a>
+          <a class="service-row" href="#contact"><span class="service-no">01</span><h3>Personal protection</h3><p>Discreet support shaped around your routine, environment, and preferences.</p><span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+          <a class="service-row" href="#contact"><span class="service-no">02</span><h3>Event &amp; site security</h3><p>A thoughtful security presence for gatherings, venues, and daily operations.</p><span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+          <a class="service-row" href="#contact"><span class="service-no">03</span><h3>Security planning</h3><p>Practical preparation to clarify concerns, priorities, and sensible next steps.</p><span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
         </div>
       </div>
     </section>
@@ -393,7 +398,7 @@
             </fieldset>
             -->
             <div class="field full"><label for="message">Message</label><textarea id="message" name="message" required placeholder="Tell us a little about what you need."></textarea></div>
-            <div class="form-submit"><button class="primary-action" type="submit">Send inquiry <span aria-hidden="true">↗</span></button><p class="form-status" id="form-status" aria-live="polite"></p></div>
+            <div class="form-submit"><button class="primary-action" type="submit">Send inquiry <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button><p class="form-status" id="form-status" aria-live="polite"></p></div>
           </form>
         </div>
       </div>
