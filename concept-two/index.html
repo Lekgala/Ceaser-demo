@@ -250,7 +250,22 @@
       .footer-bottom { align-items: flex-start; flex-direction: column; gap: 8px; }
     }
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.2,.7,.2,1) var(--d,0s), transform .85s cubic-bezier(.2,.7,.2,1) var(--d,0s), padding .25s, background .25s; will-change: opacity, transform; }
+    .reveal.from-right { transform: translateX(48px) scale(.97); }
+    .reveal.from-left { transform: translateX(-36px); }
     .reveal.in { opacity: 1; transform: none; }
+    .progress { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: var(--gold); transform: scaleX(var(--p,0)); transform-origin: left; pointer-events: none; }
+    .hero::before { transform: translate3d(0, var(--py,0px), 0); }
+    .image-frame { overflow: hidden; }
+    .image-frame img { transform: scale(1.08) translate3d(0, var(--iy,0px), 0); will-change: transform; }
+    .kicker::before { transform-origin: left; animation: line-grow .9s .2s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes line-grow { from { transform: scaleX(0); } }
+    .service-row { position: relative; }
+    .service-row::after { position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px; background: var(--gold); content: ""; transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+    .service-row:hover::after { transform: scaleX(1); }
+    .primary-action:active { transform: translateY(0) scale(.98); }
+    .theme-anim body, .theme-anim section, .theme-anim .method-inner, .theme-anim .contact-card, .theme-anim .footer-panel, .theme-anim .field input, .theme-anim .field textarea { transition: background-color .5s ease, color .5s ease, border-color .5s ease; }
+    .theme-toggle svg { transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+    .theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
     .header { transition: box-shadow .3s; }
     .header.scrolled { box-shadow: 0 10px 30px rgba(0,0,0,.35); }
     .image-frame { transition: box-shadow .3s; }
@@ -459,6 +474,8 @@
       themeToggle.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
     };
     themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.add('theme-anim');
+      setTimeout(() => document.documentElement.classList.remove('theme-anim'), 600);
       const light = document.documentElement.dataset.theme !== 'light';
       applyTheme(light);
       try { localStorage.setItem('concept-two-theme', light ? 'light' : 'dark'); } catch {}
@@ -478,11 +495,28 @@
         el.style.setProperty('--d', `${Math.min(i, 5) * .09}s`);
         revealObserver.observe(el);
       }));
+      document.querySelectorAll('.hero-aside').forEach(el => el.classList.add('from-right'));
+      document.querySelectorAll('.service-row').forEach(el => el.classList.add('from-left'));
     }
     const header = document.querySelector('.header');
-    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    const bar = document.createElement('span');
+    bar.className = 'progress';
+    header.appendChild(bar);
+    const root = document.documentElement;
+    let ticking = false;
+    const update = () => {
+      const y = window.scrollY;
+      const max = root.scrollHeight - window.innerHeight;
+      header.classList.toggle('scrolled', y > 8);
+      bar.style.setProperty('--p', max > 0 ? (y / max).toFixed(4) : 0);
+      if (motionOk && y < window.innerHeight * 1.5) {
+        root.style.setProperty('--py', `${(y * -.12).toFixed(1)}px`);
+        root.style.setProperty('--iy', `${(y * .06).toFixed(1)}px`);
+      }
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
     document.querySelector('#year').textContent = new Date().getFullYear();
     document.querySelector('#inquiry-form').addEventListener('submit', event => {
       event.preventDefault();
